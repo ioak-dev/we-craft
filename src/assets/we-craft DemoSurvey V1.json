@@ -1,0 +1,85 @@
+{
+    "surveyHeader": "SAP TM Survey AI Demo",
+    "surveyHeaderSubtitle": "This survey is made to gather requirements for SAP TM shipper scenario.",
+    "sections": [
+        {
+            "sectionHeader": "About You",
+            "sectionHeaderSubtitle": "This section will inquire about your responsibilities within your organization.",
+            "questions": [
+                {
+                    "question": "Which department do you work for, and what is your departments role?",
+                    "questionSubtitle": "For example, Group Logistics, Invoicing and Settlement etc.  Be as detailed as possible in your answer.",
+                    "type": "longtext",
+                    "AIRelevant": false,
+                    "response": ""
+                },
+                {
+                    "question": "What is your business role?",
+                    "questionSubtitle": "What is your primary role within your department or organization? For example, Transportation Planner.",
+                    "type": "longtext",
+                    "AIRelevant": false,
+                    "response": ""
+                },
+                {
+                    "question": "What geographical scope are you responsible for?",
+                    "questionSubtitle": "In which region(s) do you primarily operate or oversee operations? Please provide specific examples, such as 'the DACH countries in Europe', or 'UK, South East'.",
+                    "type": "longtext",
+                    "AIRelevant": false,
+                    "response": ""
+                },
+                {
+                    "question": "Which modes of transport are most relevant to your responsibilities within the organization?",
+                    "questionSubtitle": "Please select all that apply.",
+                    "type": "multichoice",
+                    "options": [
+                        "road",
+                        "rail",
+                        "Barge / Inland Waterway",
+                        "sea",
+                        "Multimodal (combination of modes)",
+                        "Parcel"
+                    ],
+                    "AIRelevant": false,
+                    "response": []
+                },
+                {
+                    "question": "Do you use a managed fleet?",
+                    "questionSubtitle": "",
+                    "type": "singlechoice",
+                    "options": [
+                        "Yes",
+                        "No"
+                    ],
+                    "response": ""
+                }
+            ]
+        },
+        {
+            "sectionHeader": "Planning - Road, Managed Fleet",
+            "sectionHeaderSubtitle": "This section investigates the planning process when using a managed fleet for road based transportation",
+            "questions": [
+                {
+                    "question": "Please provide details about the trucks and trailers in your fleet, including their type, quantity, and capacity.",
+                    "questionSubtitle": "Some details to consider include: home depot location, ownership status (leased or owned), and any specialized features like temperature control or tailgates.",
+                    "type": "longtext",
+                    "AIRelevant": true,
+                    "response": ""
+                },
+                {
+                    "question": "Please provide information about the locations you deliver to, including any specific rules or constraints.",
+                    "questionSubtitle": "Constraints may encompass operating hours, required specialist equipment (e.g., tailgate), maximum vehicle length, and more.",
+                    "type": "longtext",
+                    "AIRelevant": true,
+                    "response": ""
+                },
+                {
+                    "question": "Provide a user story for the daily planner activities",
+                    "questionSubtitle": "Include aspects such as the timing of transportation requirement receipts and its cut-off, planning completion deadlines, stakeholders to inform, procedures for handling changes, and other relevant details.",
+                    "type": "longtext",
+                    "AIRelevant": true,
+                    "response": ""
+                }
+            ]
+        }
+    ]
+}
