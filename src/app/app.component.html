@@ -81,8 +81,7 @@
           {{chat.sender}}
         </span>
       </div>
-      <div class="content">
-        {{chat.content}}
+      <div class="content" [innerHTML]="chat.content">
       </div>
     </div>
     <div *ngIf="showChatInput">

@@ -58,6 +58,12 @@ export class AppComponent {
       "questionId": "",
       "sender": "user",
       "content": "Clarify as bullet points"
+    },
+    {
+      "id": "",
+      "questionId": "",
+      "sender": "assistant",
+      "content": "- We have a fleet comprising of 20 cabs utilized primarily to move our 30  box trailers. <br> - These box trailers each measure 13.6m in length and can carry up to a weight of 31 tonnes. We usually load these trailers up to a volume of 90m3. <br> - Some of these trailers are outfitted with tail lifts, making them versatile for varied needs. <br> - Our fleet also includes 5 rigid trucks, each with a weight capacity of 7.5 tonnes and a maximum volume capacity of 30cbm. <br> - All the 7.5-tonne rigid trucks are equipped with tail lifts, granting the possibility of unloading goods when no trailer dock is available. <br> - The cabs, trailers and trucks in our fleet offer us great flexibility, allowing us to meet the varied needs of our operations efficiently."
     }
   ];
   chatInput: string = '';
