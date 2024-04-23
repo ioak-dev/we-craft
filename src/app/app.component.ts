@@ -1,14 +1,15 @@
-import { Component } from "@angular/core";
-import * as exampleData from "../assets/we-craft DemoSurvey V1.json";
+import { Component, OnInit } from "@angular/core";
+import * as surevyFormData from "../assets/we-craft DemoSurvey V1.json";
+import { HttpService } from "./http.service";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = "we-craft";
-  data: any;
+  formData: any;
   selectedValue = "Yes";
   chatData: any = [
     {
@@ -68,10 +69,34 @@ export class AppComponent {
   ];
   chatInput: string = '';
   showChatInput: boolean = false;
+  surveyId!: string;
 
-  constructor() {
-    console.log(exampleData);
-    this.data = exampleData;
+  constructor(private httpService: HttpService) {
+    console.log(surevyFormData);
+    this.formData = surevyFormData;
+  }
+
+  ngOnInit(): void {
+    this.httpService.uploadJson(surevyFormData).subscribe(
+      (result) => {
+        console.log(result);
+        this.surveyId = result;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getSurveyDetails() {
+    this.httpService.getSurveyDetailsById(this.surveyId).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   toggleSelection(e: any, items: any, i: number, response: string[]): void {
@@ -83,7 +108,7 @@ export class AppComponent {
   }
 
   onSubmit() {
-    console.log(this.data.default);
+    console.log(this.formData.default);
   }
 
   toggleChatInput() {

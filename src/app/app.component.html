@@ -4,16 +4,16 @@
     <form id="form">
       <div class="heading-wrapper">
         <h1>
-          {{data.surveyHeader}}
+          {{formData.surveyHeader}}
         </h1>
-        <h4>{{data.surveyHeaderSubtitle}}</h4>
+        <h4>{{formData.surveyHeaderSubtitle}}</h4>
       </div>
       <div class="content-wrapper">
         <!-- <div class="notice-container">
           Hi, Manoj. When you submit this form, the owner will see your name and email address.
         </div> -->
 
-        <div *ngFor="let section of data.sections">
+        <div *ngFor="let section of formData.sections">
           <div class="heading">
             <div class="title">
               {{section.sectionHeader}}
