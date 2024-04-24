@@ -1,5 +1,6 @@
 <div class="main-wrapper">
   <div class="left">
+    <input class="form-control" type="file" (change)="onChange($event)" />
     <!-- Create Form -->
     <form id="form">
       <div class="heading-wrapper">
@@ -96,8 +97,8 @@
           <textarea [(ngModel)]="chatInput" type="text" rows="4" [ngModelOptions]="{standalone: true}"
             placeholder="Enter a user message here."></textarea>
         </div>
-        <svg (click)="showChatInput = false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24"
-          class="chat-message-remove-button">
+        <svg (click)="showChatInput = false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+          fill="currentColor" viewBox="0 0 24 24" class="chat-message-remove-button">
           <path d="M9 11a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"></path>
           <path fill-rule="evenodd"
             d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2ZM4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"

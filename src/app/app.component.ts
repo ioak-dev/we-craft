@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import * as surevyFormData from "../assets/we-craft DemoSurvey V1.json";
+import * as surveyFormData from "../assets/we-craft DemoSurvey V1.json";
 import { HttpService } from "./http.service";
 
 @Component({
@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   title = "we-craft";
   formData: any;
   selectedValue = "Yes";
+  file: any = null; // Variable to store file to Upload
   chatData: any = [
     {
       "id": "",
@@ -72,20 +73,44 @@ export class AppComponent implements OnInit {
   surveyId!: string;
 
   constructor(private httpService: HttpService) {
-    console.log(surevyFormData);
-    this.formData = surevyFormData;
+    console.log(surveyFormData);
+    this.formData = surveyFormData;
   }
 
   ngOnInit(): void {
-    this.httpService.uploadJson(surevyFormData).subscribe(
-      (result) => {
-        console.log(result);
-        this.surveyId = result;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    //   this.httpService.uploadJson(this.file).subscribe(
+    //     (result) => {
+    //       console.log(result);
+    //       this.surveyId = result;
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
+  }
+
+  // On file Select
+  onChange(event: any) {
+    this.file = event.target.files[0];
+    this.onUpload();
+  }
+
+  // OnClick of button Upload
+  onUpload() {
+    if (this.file) {
+      console.log(this.file);
+      let formData = new FormData();
+      formData.append("myfile", this.file);
+      this.httpService.uploadJson(formData).subscribe(
+        (result) => {
+          console.log(result);
+          this.surveyId = result;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   getSurveyDetails() {
