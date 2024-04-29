@@ -1,0 +1,162 @@
+{
+    "id": "662f57c886de5b3dc0530b41",
+    "surveyHeader": "SAP TM Survey AI Demo",
+    "surveySubTitle": "This survey is made to gather requirements for SAP TM shipper scenario.",
+    "status": null,
+    "surveySectionList": [
+      {
+        "id": "662f57c886de5b3dc0530b42",
+        "surveyId": "662f57c886de5b3dc0530b41",
+        "sectionHeader": "About You",
+        "sectionSubTitle": "This section will inquire about your responsibilities within your organization.",
+        "questionList": [
+          {
+            "id": "662f57c886de5b3dc0530b43",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b42",
+            "questionHeader": "Which department do you work for, and what is your departments role?",
+            "questionSubTitle": "For example, Group Logistics, Invoicing and Settlement etc.  Be as detailed as possible in your answer.",
+            "aiRelevant": false,
+            "questionType": "longtext",
+            "options": null,
+            "questionResponse": "",
+            "questionResponseList": null,
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.909+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.909+05:30"
+          },
+          {
+            "id": "662f57c886de5b3dc0530b44",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b42",
+            "questionHeader": "What is your business role?",
+            "questionSubTitle": "What is your primary role within your department or organization? For example, Transportation Planner.",
+            "aiRelevant": false,
+            "questionType": "longtext",
+            "options": null,
+            "questionResponse": "",
+            "questionResponseList": null,
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.91+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.91+05:30"
+          },
+          {
+            "id": "662f57c886de5b3dc0530b45",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b42",
+            "questionHeader": "What geographical scope are you responsible for?",
+            "questionSubTitle": "In which region(s) do you primarily operate or oversee operations? Please provide specific examples, such as 'the DACH countries in Europe', or 'UK, South East'.",
+            "aiRelevant": false,
+            "questionType": "longtext",
+            "options": null,
+            "questionResponse": "",
+            "questionResponseList": null,
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.912+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.912+05:30"
+          },
+          {
+            "id": "662f57c886de5b3dc0530b46",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b42",
+            "questionHeader": "Which modes of transport are most relevant to your responsibilities within the organization?",
+            "questionSubTitle": "Please select all that apply.",
+            "aiRelevant": false,
+            "questionType": "multichoice",
+            "options": [
+              "road",
+              "rail",
+              "Barge / Inland Waterway",
+              "sea",
+              "Multimodal (combination of modes)",
+              "Parcel"
+            ],
+            "questionResponse": "",
+            "questionResponseList": [],
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.913+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.913+05:30"
+          },
+          {
+            "id": "662f57c886de5b3dc0530b47",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b42",
+            "questionHeader": "Do you use a managed fleet?",
+            "questionSubTitle": "",
+            "aiRelevant": false,
+            "questionType": "singlechoice",
+            "options": [
+              "Yes",
+              "No"
+            ],
+            "questionResponse": "",
+            "questionResponseList": null,
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.914+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.914+05:30"
+          }
+        ]
+      },
+      {
+        "id": "662f57c886de5b3dc0530b48",
+        "surveyId": "662f57c886de5b3dc0530b41",
+        "sectionHeader": "Planning - Road, Managed Fleet",
+        "sectionSubTitle": "This section investigates the planning process when using a managed fleet for road based transportation",
+        "questionList": [
+          {
+            "id": "662f57c886de5b3dc0530b49",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b48",
+            "questionHeader": "Please provide details about the trucks and trailers in your fleet, including their type, quantity, and capacity.",
+            "questionSubTitle": "Some details to consider include: home depot location, ownership status (leased or owned), and any specialized features like temperature control or tailgates.",
+            "aiRelevant": true,
+            "questionType": "longtext",
+            "options": null,
+            "questionResponse": "",
+            "questionResponseList": null,
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.916+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.916+05:30"
+          },
+          {
+            "id": "662f57c886de5b3dc0530b4a",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b48",
+            "questionHeader": "Please provide information about the locations you deliver to, including any specific rules or constraints.",
+            "questionSubTitle": "Constraints may encompass operating hours, required specialist equipment (e.g., tailgate), maximum vehicle length, and more.",
+            "aiRelevant": true,
+            "questionType": "longtext",
+            "options": null,
+            "questionResponse": "",
+            "questionResponseList": null,
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.918+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.918+05:30"
+          },
+          {
+            "id": "662f57c886de5b3dc0530b4b",
+            "surveyId": "662f57c886de5b3dc0530b41",
+            "sectionId": "662f57c886de5b3dc0530b48",
+            "questionHeader": "Provide a user story for the daily planner activities",
+            "questionSubTitle": "Include aspects such as the timing of transportation requirement receipts and its cut-off, planning completion deadlines, stakeholders to inform, procedures for handling changes, and other relevant details.",
+            "aiRelevant": true,
+            "questionType": "longtext",
+            "options": null,
+            "questionResponse": "",
+            "questionResponseList": null,
+            "createdBy": null,
+            "createdDate": "2024-04-29T13:48:16.92+05:30",
+            "lastModifiedBy": null,
+            "lastModifiedDate": "2024-04-29T13:48:16.92+05:30"
+          }
+        ]
+      }
+    ]
+  }

@@ -47,6 +47,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    .left,
+    .right {
+        overflow-y: auto;
+        max-height: 100vh;
+    }
+
     .left {
 
         /* Styling the Form (Color, Padding, Shadow) */
@@ -166,7 +172,6 @@
                     align-items: center;
                     justify-content: space-between;
                     margin-top: 1.25rem;
-                    width: 100%;
 
                     /* Styling Button */
                     button {

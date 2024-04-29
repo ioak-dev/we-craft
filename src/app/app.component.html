@@ -1,59 +1,60 @@
 <div class="main-wrapper">
   <div class="left">
     <input class="form-control" type="file" (change)="onChange($event)" />
+    <pre>{{formData | json}}</pre>
     <!-- Create Form -->
     <form id="form">
       <div class="heading-wrapper">
         <h1>
           {{formData.surveyHeader}}
         </h1>
-        <h4>{{formData.surveyHeaderSubtitle}}</h4>
+        <h4>{{formData.surveySubTitle}}</h4>
       </div>
       <div class="content-wrapper">
         <!-- <div class="notice-container">
           Hi, Manoj. When you submit this form, the owner will see your name and email address.
         </div> -->
 
-        <div *ngFor="let section of formData.sections">
+        <div *ngFor="let section of formData.surveySectionList">
           <div class="heading">
             <div class="title">
               {{section.sectionHeader}}
             </div>
             <div class="subtitle">
-              {{section.sectionHeaderSubtitle}}
+              {{section.sectionSubTitle}}
             </div>
           </div>
-          <div *ngFor="let item of section.questions; index as i">
+          <div *ngFor="let item of section.questionList; index as i">
             <div class="question-item">
               <!-- Details -->
               <div class="form-control">
                 <label for="name" id="label-name">
-                  {{i+1}}. {{item.question}}
+                  {{i+1}}. {{item.questionHeader}}
                 </label>
                 <div class="question-subtitle">
                   {{item.questionSubtitle}}
                 </div>
                 <!-- Input Type Text -->
-                <textarea *ngIf="item.type == 'longtext'" [(ngModel)]="item.response" type="text" rows="4"
+                <textarea *ngIf="item.questionType == 'longtext'" [(ngModel)]="item.questionResponse" type="text" rows="4"
                   [ngModelOptions]="{standalone: true}" placeholder="Enter your answer"></textarea>
 
                 <!-- checkbox -->
-                <div *ngIf="item.type == 'multichoice'">
+                <div *ngIf="item.questionType == 'multichoice'">
                   <label *ngFor="let option of item.options; let i = index">
-                    <input type="checkbox" (change)="toggleSelection($event, item.options, i, item.response)">{{option}}
+                    <input type="checkbox" (change)="toggleSelection($event, item.options, i, item.questionResponseList)">{{option}}
                   </label>
                 </div>
 
                 <!-- radio -->
-                <div *ngIf="item.type == 'singlechoice'">
+                <div *ngIf="item.questionType == 'singlechoice'">
                   <label *ngFor="let option of item.options">
-                    <input type="radio" [(ngModel)]="item.response" [value]="option"
+                    <input type="radio" [(ngModel)]="item.questionResponse" [value]="option"
                       [ngModelOptions]="{standalone: true}">{{option}}
                   </label>
                 </div>
               </div>
 
-              <div class="form-button" *ngIf="item.AIRelevant">
+              <div class="form-button" *ngIf="item.aiRelevant">
                 <button type="submit" value="submit">
                   View Chat
                 </button>
@@ -70,6 +71,9 @@
           <!-- Multi-line Text Input Control -->
           <button type="submit" value="submit" (click)="onSubmit()">
             Submit
+          </button>
+          <button type="submit" value="submit" (click)="resetChat()">
+            Reset
           </button>
         </div>
       </div>

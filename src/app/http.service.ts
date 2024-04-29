@@ -15,13 +15,15 @@ export class HttpService {
   constructor(
     private http: HttpClient) { }
 
-  uploadJson(payload: any): Observable<any> {
+  uploadJson(fileData: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', fileData, fileData?.name);
     return this.http
-      .post(`${this.baseurl}/survey/upload `, payload, httpOptions)
+      .post(`${this.baseurl}/survey/upload`, formData)
       .pipe(map((response) => response));
   }
 
-  getSurveyDetailsById(surveyId: string): Observable<any> {
+  getSurveyById(surveyId: string): Observable<any> {
     return this.http
       .get(`${this.baseurl}/survey/details/${surveyId}`, httpOptions)
       .pipe(map((response) => response));

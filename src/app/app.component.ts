@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import * as surveyFormData from "../assets/we-craft DemoSurvey V1.json";
+import * as surveyFormData from "../assets/wecraft_survey.json";
 import { HttpService } from "./http.service";
 
 @Component({
@@ -9,7 +9,7 @@ import { HttpService } from "./http.service";
 })
 export class AppComponent implements OnInit {
   title = "we-craft";
-  formData: any;
+  formData: any = {};
   selectedValue = "Yes";
   file: any = null; // Variable to store file to Upload
   chatData: any = [
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
   ];
   chatInput: string = '';
   showChatInput: boolean = false;
-  surveyId!: string;
+  surveyId: string = '';
 
   constructor(private httpService: HttpService) {
     console.log(surveyFormData);
@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
 
   // On file Select
   onChange(event: any) {
-    this.file = event.target.files[0];
+    this.file = event.target.files[0] as File;
     this.onUpload();
   }
 
@@ -99,29 +99,30 @@ export class AppComponent implements OnInit {
   onUpload() {
     if (this.file) {
       console.log(this.file);
-      let formData = new FormData();
-      formData.append("myfile", this.file);
-      this.httpService.uploadJson(formData).subscribe(
-        (result) => {
-          console.log(result);
-          this.surveyId = result;
+      this.httpService.uploadJson(this.file).subscribe({
+        next: (result) => {
+          this.surveyId = result.surveyId;
+          console.log(this.surveyId);
+          this.getSurveyDetails();
         },
-        (error) => {
+        error: (error) => {
           console.log(error);
         }
-      );
+      });
     }
   }
 
   getSurveyDetails() {
-    this.httpService.getSurveyDetailsById(this.surveyId).subscribe(
-      (result) => {
+    this.httpService.getSurveyById(this.surveyId).subscribe({
+      next: (result) => {
         console.log(result);
+        this.formData = result.survey;
+        console.log(this.formData);
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
       }
-    );
+    });
   }
 
   toggleSelection(e: any, items: any, i: number, response: string[]): void {
@@ -134,6 +135,10 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     console.log(this.formData.default);
+  }
+
+  resetChat() {
+    console.log('TBD');
   }
 
   toggleChatInput() {
