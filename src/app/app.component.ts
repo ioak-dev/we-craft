@@ -37,17 +37,29 @@ export interface IQuestion {
 })
 export class AppComponent implements OnInit {
   title = "we-craft";
-  formData: any = {};
+  formData: any;
   selectedValue = "Yes";
   file: any = null; // Variable to store file to Upload
   chatData: IChat[] = [];
   chatInput: string = '';
   showChatInput: boolean = false;
   surveyId: string = '';
+  selectedQuestion: IQuestion = {
+    id: "",
+    surveyId: "",
+    sectionId: "",
+    questionHeader: "",
+    questionSubTitle: "",
+    aiRelevant: false,
+    questionType: "",
+    options: [],
+    questionResponse: "",
+    questionResponseList: []
+  };
 
   constructor(private httpService: HttpService) {
     console.log(surveyFormData);
-    this.formData = surveyFormData;
+    // this.formData = surveyFormData;
   }
 
   ngOnInit(): void { }
@@ -109,6 +121,7 @@ export class AppComponent implements OnInit {
   }
 
   getChatsByQuestionId(question: IQuestion) {
+    this.selectedQuestion = question;
     this.httpService.getChatMessagesByQuestionId(question.id).subscribe({
       next: (result) => {
         this.chatData = result;
@@ -145,7 +158,20 @@ export class AppComponent implements OnInit {
   }
 
   sendUserChat() {
-    console.log('TBD');
+    const obj: IChat = {
+      questionId: this.selectedQuestion.id,
+      sender: "user",
+      content: this.chatInput
+    };
+    this.httpService.updateChatByQuestionId(obj).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.chatInput = '';
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
   toggleChatInput() {

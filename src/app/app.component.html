@@ -1,9 +1,9 @@
 <div class="main-wrapper">
   <div class="left">
-    <input class="form-control" type="file" (change)="onChange($event)" />
+    <input *ngIf="!formData" class="form-control" type="file" (change)="onChange($event)" />
     <!-- <pre>{{formData | json}}</pre> -->
     <!-- Create Form -->
-    <form id="form">
+    <form *ngIf="formData" id="form">
       <div class="heading-wrapper">
         <h1>
           {{formData.surveyHeader}}
