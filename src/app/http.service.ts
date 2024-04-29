@@ -28,4 +28,23 @@ export class HttpService {
       .get(`${this.baseurl}/survey/details/${surveyId}`, httpOptions)
       .pipe(map((response) => response));
   }
+
+  saveQuestionResponsebyQuestionId(questionId: string, response: any) {
+    return this.http
+      .put(`${this.baseurl}/question/${questionId}`, response)
+      .pipe(map((response) => response));
+
+  }
+
+  getChatMessagesByQuestionId(questionId: string): Observable<any> {
+    return this.http
+      .get(`${this.baseurl}/question/message/${questionId}`, httpOptions)
+      .pipe(map((response) => response));
+  }
+
+  updateChatByQuestionId(object: any) {
+    return this.http
+      .post(`${this.baseurl}/message/chatgpt`, object)
+      .pipe(map((response) => response));
+  }
 }

@@ -161,6 +161,11 @@
                             font-size: 0.750rem;
                             color: var(--palette-text-color-brand-background);
                             background: var(--palette-form-primary);
+
+                            &:disabled {
+                                background-color: #ddd;
+                                cursor: auto;
+                            }
                         }
                     }
                 }
@@ -172,32 +177,6 @@
                     align-items: center;
                     justify-content: space-between;
                     margin-top: 1.25rem;
-
-                    /* Styling Button */
-                    button {
-                        display: inline-flex;
-                        flex-flow: row;
-                        align-items: center;
-                        justify-content: center;
-                        border: 0.0625rem solid transparent;
-                        vertical-align: middle;
-                        white-space: nowrap;
-                        margin: 0px;
-                        margin-top: 1.25rem;
-                        cursor: pointer;
-                        text-decoration-line: none;
-                        outline-style: none;
-                        width: fit-content;
-                        border-radius: 0.25rem;
-                        padding: 0px 1.25rem;
-                        min-width: 5.375rem;
-                        min-height: 2.5rem;
-                        line-height: 1.375rem;
-                        font-weight: 600;
-                        font-size: 0.875rem;
-                        color: var(--palette-text-color-brand-background);
-                        background: var(--palette-form-primary);
-                    }
                 }
             }
         }
@@ -282,7 +261,6 @@
             .content {
                 textarea {
                     border: none;
-                    border-bottom: 3px solid #fff;
                     border-radius: 4px;
                     font-family: inherit;
                     padding: 10px;
@@ -313,5 +291,35 @@
             font-weight: 600;
             cursor: pointer;
         }
+    }
+}
+
+button {
+    display: inline-flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    border: 0.0625rem solid transparent;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin: 0px;
+    margin-top: 1.25rem;
+    cursor: pointer;
+    text-decoration-line: none;
+    outline-style: none;
+    width: fit-content;
+    border-radius: 0.25rem;
+    padding: 0px 0.75rem;
+    min-width: 4rem;
+    min-height: 2rem;
+    line-height: 1rem;
+    font-weight: 400;
+    font-size: 0.750rem;
+    color: var(--palette-text-color-brand-background);
+    background: var(--palette-form-primary);
+
+    &:disabled {
+        background-color: #ddd;
+        cursor: auto;
     }
 }

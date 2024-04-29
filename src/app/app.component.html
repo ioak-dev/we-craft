@@ -1,7 +1,7 @@
 <div class="main-wrapper">
   <div class="left">
     <input class="form-control" type="file" (change)="onChange($event)" />
-    <pre>{{formData | json}}</pre>
+    <!-- <pre>{{formData | json}}</pre> -->
     <!-- Create Form -->
     <form id="form">
       <div class="heading-wrapper">
@@ -32,16 +32,18 @@
                   {{i+1}}. {{item.questionHeader}}
                 </label>
                 <div class="question-subtitle">
-                  {{item.questionSubtitle}}
+                  {{item.questionSubTitle}}
                 </div>
                 <!-- Input Type Text -->
-                <textarea *ngIf="item.questionType == 'longtext'" [(ngModel)]="item.questionResponse" type="text" rows="4"
-                  [ngModelOptions]="{standalone: true}" placeholder="Enter your answer"></textarea>
+                <textarea *ngIf="item.questionType == 'longtext'" [(ngModel)]="item.questionResponse" type="text"
+                  rows="4" [ngModelOptions]="{standalone: true}" placeholder="Enter your answer"
+                  (focusout)="saveQuestionResponse(item)"></textarea>
 
                 <!-- checkbox -->
                 <div *ngIf="item.questionType == 'multichoice'">
                   <label *ngFor="let option of item.options; let i = index">
-                    <input type="checkbox" (change)="toggleSelection($event, item.options, i, item.questionResponseList)">{{option}}
+                    <input type="checkbox"
+                      (change)="toggleSelection($event, item.options, i, item.questionResponseList)">{{option}}
                   </label>
                 </div>
 
@@ -55,12 +57,12 @@
               </div>
 
               <div class="form-button" *ngIf="item.aiRelevant">
-                <button type="submit" value="submit">
+                <button (click)="getChatsByQuestionId(item)" [disabled]="item.questionResponse === ''">
                   View Chat
                 </button>
                 &nbsp;
                 &nbsp;
-                <button type="submit" value="submit">
+                <button (click)="updateChatByQuestionId(item)" [disabled]="item.questionResponse === ''">
                   Update Chat
                 </button>
               </div>
@@ -72,22 +74,32 @@
           <button type="submit" value="submit" (click)="onSubmit()">
             Submit
           </button>
-          <button type="submit" value="submit" (click)="resetChat()">
-            Reset
+          <button type="submit" value="submit" (click)="saveChat()">
+            Save
           </button>
         </div>
       </div>
     </form>
   </div>
   <div class="right">
-    <div *ngFor="let chat of chatData" class="chat-wrapper">
-      <div>
-        <span class="sender">
-          {{chat.sender}}
-        </span>
+    <div *ngFor="let chat of chatData">
+      <div class="chat-wrapper" *ngIf="chat.sender !== 'system'">
+        <div>
+          <span class="sender">
+            {{chat.sender}}
+          </span>
+        </div>
+        <div class="content" [innerHTML]="chat.content"></div>
       </div>
-      <div class="content" [innerHTML]="chat.content">
-      </div>
+    </div>
+    <div class="add-message" (click)="toggleChatInput()" *ngIf="!showChatInput">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M13 9a1 1 0 1 0-2 0v2H9a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 1 0 0-2h-2V9Z"></path>
+        <path fill-rule="evenodd"
+          d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2ZM4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"
+          clip-rule="evenodd"></path>
+      </svg>
+      Add Message
     </div>
     <div *ngIf="showChatInput">
       <div class="chat-wrapper">
@@ -108,16 +120,13 @@
             d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2ZM4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"
             clip-rule="evenodd"></path>
         </svg>
+        <div></div>
+        <div class="button-wrapper">
+          <button type="submit" value="submit" (click)="sendUserChat()">
+            Send
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="add-message" (click)="toggleChatInput()" *ngIf="!showChatInput">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M13 9a1 1 0 1 0-2 0v2H9a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 1 0 0-2h-2V9Z"></path>
-        <path fill-rule="evenodd"
-          d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2ZM4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Z"
-          clip-rule="evenodd"></path>
-      </svg>
-      Add Message
     </div>
   </div>
 </div>
