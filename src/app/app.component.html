@@ -36,8 +36,7 @@
                 </div>
                 <!-- Input Type Text -->
                 <textarea *ngIf="item.questionType == 'longtext'" [(ngModel)]="item.questionResponse" type="text"
-                  rows="4" [ngModelOptions]="{standalone: true}" placeholder="Enter your answer"
-                  (focusout)="saveQuestionResponse(item)"></textarea>
+                  rows="4" [ngModelOptions]="{standalone: true}" placeholder="Enter your answer"></textarea>
 
                 <!-- checkbox -->
                 <div *ngIf="item.questionType == 'multichoice'">
@@ -57,12 +56,12 @@
               </div>
 
               <div class="form-button" *ngIf="item.aiRelevant">
-                <button (click)="getChatsByQuestionId(item)" [disabled]="item.questionResponse === ''">
+                <button *ngIf="item.questionResponse !== ''" (click)="getChatsByQuestionId(item)" [disabled]="item.questionResponse === ''">
                   View Chat
                 </button>
                 &nbsp;
                 &nbsp;
-                <button (click)="updateChatByQuestionId(item)" [disabled]="item.questionResponse === ''">
+                <button (click)="saveQuestionResponse(item)" [disabled]="item.questionResponse === ''">
                   Update Chat
                 </button>
                 &nbsp;
@@ -86,6 +85,7 @@
       </div>
     </form>
   </div>
+
   <div class="right">
     <div *ngFor="let chat of chatData">
       <div class="chat-wrapper" *ngIf="chat.sender !== 'system'">
@@ -127,7 +127,7 @@
         </svg>
         <div></div>
         <div class="button-wrapper">
-          <button type="submit" value="submit" (click)="sendUserChat()">
+          <button type="submit" value="submit" (click)="sendUserChat()" [disabled]="selectedQuestion.questionResponse === ''">
             Send
           </button>
         </div>

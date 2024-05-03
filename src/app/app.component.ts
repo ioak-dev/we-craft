@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   chatData: IChat[] = [];
   chatInput: string = '';
   showChatInput: boolean = false;
-  surveyId: string = '6634d1a43900c03319d40d2e';
+  surveyId: string = '';
   selectedQuestion: IQuestion = {
     id: "",
     surveyId: "",
@@ -111,10 +111,12 @@ export class AppComponent implements OnInit {
   }
 
   saveQuestionResponse(question: IQuestion) {
+    this.selectedQuestion = question;
     console.log(question);
     this.httpService.saveQuestionResponsebyQuestionId(question.id, question).subscribe({
-      next: (result) => {
+      next: (result: any) => {
         console.log(result);
+        this.chatData = result.messageList;
       },
       error: (error) => {
         console.log(error);
@@ -166,9 +168,10 @@ export class AppComponent implements OnInit {
       content: this.chatInput
     };
     this.httpService.updateChatByQuestionId(obj).subscribe({
-      next: (result) => {
+      next: (result: any) => {
         console.log(result);
         this.chatInput = '';
+        this.chatData = result;
       },
       error: (error) => {
         console.log(error);
