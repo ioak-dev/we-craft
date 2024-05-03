@@ -317,9 +317,12 @@ button {
     font-size: 0.750rem;
     color: var(--palette-text-color-brand-background);
     background: var(--palette-form-primary);
+    &.warn {
+        background-color: var(--palette-required-red) !important;
+    }
 
     &:disabled {
-        background-color: #ddd;
+        background-color: #ddd !important;
         cursor: auto;
     }
 }

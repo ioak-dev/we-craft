@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   chatData: IChat[] = [];
   chatInput: string = '';
   showChatInput: boolean = false;
-  surveyId: string = '';
+  surveyId: string = '6634d1a43900c03319d40d2e';
   selectedQuestion: IQuestion = {
     id: "",
     surveyId: "",
@@ -62,7 +62,9 @@ export class AppComponent implements OnInit {
     // this.formData = surveyFormData;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getSurveyDetails();
+  }
 
   // On file Select
   onChange(event: any) {

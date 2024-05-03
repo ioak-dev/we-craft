@@ -65,6 +65,11 @@
                 <button (click)="updateChatByQuestionId(item)" [disabled]="item.questionResponse === ''">
                   Update Chat
                 </button>
+                &nbsp;
+                &nbsp;
+                <button class="warn" (click)="chatData = []" [disabled]="item.questionResponse === ''">
+                  Clear Chat
+                </button>
               </div>
             </div>
           </div>
