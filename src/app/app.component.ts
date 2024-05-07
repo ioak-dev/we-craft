@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
     questionResponse: "",
     questionResponseList: []
   };
+  showSpinner: boolean = false;
 
   constructor(private httpService: HttpService) {
     // this.formData = surveyFormData;
@@ -108,9 +109,11 @@ export class AppComponent implements OnInit {
   }
 
   saveQuestionResponse(question: IQuestion) {
+    this.showSpinner = !this.showSpinner;
     this.selectedQuestion = question;
     this.httpService.saveQuestionResponsebyQuestionId(question.id, question).subscribe({
       next: (result: any) => {
+        this.showSpinner = !this.showSpinner;
         this.chatData = result.messageList;
       },
       error: (error) => {
@@ -168,6 +171,7 @@ export class AppComponent implements OnInit {
   }
 
   sendUserChat() {
+    this.showSpinner = !this.showSpinner;
     const obj: IChat = {
       questionId: this.selectedQuestion.id,
       sender: "user",
@@ -177,6 +181,7 @@ export class AppComponent implements OnInit {
       next: (result: any) => {
         this.chatInput = '';
         this.chatData = result;
+        this.showSpinner = !this.showSpinner;
       },
       error: (error) => {
         console.log(error);

@@ -1,4 +1,7 @@
 <div class="main-wrapper">
+  <div *ngIf="showSpinner" class="spinner-wrapper">
+    <span class="loader"></span>
+  </div>
   <div class="left">
     <input *ngIf="!formData" class="form-control" type="file" (change)="onChange($event)" />
     <!-- <pre>{{formData | json}}</pre> -->
@@ -36,7 +39,8 @@
                 </div>
                 <!-- Input Type Text -->
                 <textarea *ngIf="item.questionType == 'longtext'" [(ngModel)]="item.questionResponse" type="text"
-                  rows="4" [ngModelOptions]="{standalone: true}" placeholder="Enter your answer"></textarea>
+                  rows="4" [ngModelOptions]="{standalone: true}" placeholder="Enter your answer"
+                  (click)="getChatsByQuestionId(item)"></textarea>
 
                 <!-- checkbox -->
                 <div *ngIf="item.questionType == 'multichoice'">
@@ -90,7 +94,6 @@
   <div class="right">
     <div class="selected-question" *ngIf="selectedQuestion.id">
       <p>{{selectedQuestion.questionHeader}}</p>
-      <p>{{selectedQuestion.questionResponse}}</p>
     </div>
 
     <div *ngFor="let chat of chatData">

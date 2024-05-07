@@ -53,6 +53,18 @@
         max-height: 100vh;
     }
 
+    .spinner-wrapper {
+        background-color: rgba(0, 0, 0, 0.66);
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        bottom: 0;
+        z-index: 99;
+    }
+
     .left {
 
         /* Styling the Form (Color, Padding, Shadow) */
@@ -243,19 +255,18 @@
 
     .right {
         background-color: white;
+        position: relative;
 
         pre {
             word-break: break-all;
         }
 
-        .selected-question {            
+        .selected-question {
             background-color: #cce7e6;
             padding: 0.5rem;
+
             p {
                 margin: 0.5rem;
-                &:last-child {
-                    font-weight: 500;
-                }
             }
         }
 
@@ -334,6 +345,7 @@ button {
     font-size: 0.750rem;
     color: var(--palette-text-color-brand-background);
     background: var(--palette-form-primary);
+
     &.warn {
         background-color: var(--palette-required-red) !important;
     }
@@ -341,5 +353,65 @@ button {
     &:disabled {
         background-color: #ddd !important;
         cursor: auto;
+    }
+}
+
+// Spinner
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 3px solid;
+    border-color: #FFF #FFF transparent transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loader::after,
+.loader::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent transparent var(--palette-required-red) var(--palette-required-red);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+
+.loader::before {
+    width: 32px;
+    height: 32px;
+    border-color: #FFF #FFF transparent transparent;
+    animation: rotation 1.5s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
     }
 }
