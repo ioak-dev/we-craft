@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   chatData: IChat[] = [];
   chatInput: string = '';
   showChatInput: boolean = false;
-  surveyId: string = '';
+  surveyId: any = '';
   selectedQuestion: IQuestion = {
     id: "",
     surveyId: "",
@@ -58,11 +58,11 @@ export class AppComponent implements OnInit {
   };
 
   constructor(private httpService: HttpService) {
-    console.log(surveyFormData);
     // this.formData = surveyFormData;
   }
 
   ngOnInit(): void {
+    this.surveyId = sessionStorage?.getItem('surveyId');
     this.getSurveyDetails();
   }
 
@@ -75,11 +75,9 @@ export class AppComponent implements OnInit {
   // OnClick of button Upload
   onUpload() {
     if (this.file) {
-      console.log(this.file);
       this.httpService.uploadJson(this.file).subscribe({
         next: (result) => {
           this.surveyId = result.surveyId;
-          console.log(this.surveyId);
           this.getSurveyDetails();
         },
         error: (error) => {
@@ -92,9 +90,8 @@ export class AppComponent implements OnInit {
   getSurveyDetails() {
     this.httpService.getSurveyById(this.surveyId).subscribe({
       next: (result) => {
-        console.log(result);
         this.formData = result.survey;
-        console.log(this.formData);
+        sessionStorage.setItem('surveyId', this.formData.id);
       },
       error: (error) => {
         console.log(error);
@@ -112,10 +109,8 @@ export class AppComponent implements OnInit {
 
   saveQuestionResponse(question: IQuestion) {
     this.selectedQuestion = question;
-    console.log(question);
     this.httpService.saveQuestionResponsebyQuestionId(question.id, question).subscribe({
       next: (result: any) => {
-        console.log(result);
         this.chatData = result.messageList;
       },
       error: (error) => {
@@ -129,7 +124,18 @@ export class AppComponent implements OnInit {
     this.httpService.getChatMessagesByQuestionId(question.id).subscribe({
       next: (result) => {
         this.chatData = result;
-        console.log(this.chatData);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
+  clearChatsByQuestionId(question: IQuestion) {
+    this.selectedQuestion = question;
+    this.httpService.clearChatMessagesByQuestionId(question.id).subscribe({
+      next: (result: any) => {
+        this.chatData = result;
       },
       error: (error) => {
         console.log(error);
@@ -169,7 +175,6 @@ export class AppComponent implements OnInit {
     };
     this.httpService.updateChatByQuestionId(obj).subscribe({
       next: (result: any) => {
-        console.log(result);
         this.chatInput = '';
         this.chatData = result;
       },

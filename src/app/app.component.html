@@ -25,7 +25,7 @@
             </div>
           </div>
           <div *ngFor="let item of section.questionList; index as i">
-            <div class="question-item">
+            <div class="question-item" [ngClass]="{'active': item.id === selectedQuestion.id}">
               <!-- Details -->
               <div class="form-control">
                 <label for="name" id="label-name">
@@ -56,7 +56,8 @@
               </div>
 
               <div class="form-button" *ngIf="item.aiRelevant">
-                <button *ngIf="item.questionResponse !== ''" (click)="getChatsByQuestionId(item)" [disabled]="item.questionResponse === ''">
+                <button *ngIf="item.questionResponse !== ''" (click)="getChatsByQuestionId(item)"
+                  [disabled]="item.questionResponse === ''">
                   View Chat
                 </button>
                 &nbsp;
@@ -66,7 +67,7 @@
                 </button>
                 &nbsp;
                 &nbsp;
-                <button class="warn" (click)="chatData = []" [disabled]="item.questionResponse === ''">
+                <button class="warn" (click)="clearChatsByQuestionId(item)" [disabled]="item.questionResponse === ''">
                   Clear Chat
                 </button>
               </div>
@@ -87,6 +88,11 @@
   </div>
 
   <div class="right">
+    <div class="selected-question" *ngIf="selectedQuestion.id">
+      <p>{{selectedQuestion.questionHeader}}</p>
+      <p>{{selectedQuestion.questionResponse}}</p>
+    </div>
+
     <div *ngFor="let chat of chatData">
       <div class="chat-wrapper" *ngIf="chat.sender !== 'system'">
         <div>
@@ -127,7 +133,8 @@
         </svg>
         <div></div>
         <div class="button-wrapper">
-          <button type="submit" value="submit" (click)="sendUserChat()" [disabled]="selectedQuestion.questionResponse === ''">
+          <button type="submit" value="submit" (click)="sendUserChat()"
+            [disabled]="selectedQuestion.questionResponse === ''">
             Send
           </button>
         </div>

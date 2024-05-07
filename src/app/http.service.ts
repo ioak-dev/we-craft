@@ -47,4 +47,10 @@ export class HttpService {
       .post(`${this.baseurl}/message/chatgpt`, object)
       .pipe(map((response) => response));
   }
+
+  clearChatMessagesByQuestionId(questionId: string) {
+    return this.http
+      .delete(`${this.baseurl}/question/message/${questionId}`, httpOptions)
+      .pipe(map((response) => response));
+  }
 }

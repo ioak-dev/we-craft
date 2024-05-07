@@ -124,7 +124,13 @@
                 }
 
                 .question-item {
-                    padding: 2.1875rem 1.25rem;
+                    padding: 1.1875rem 1.25rem;
+                    border-radius: 6px;
+                    margin: 1rem;
+
+                    &.active {
+                        background-color: #cce7e6;
+                    }
 
                     .question-subtitle {
                         overflow-wrap: break-word;
@@ -207,7 +213,7 @@
             font-family: inherit;
             padding: 10px;
             display: block;
-            width: 95%;
+            width: 90%;
             resize: none;
             margin: 1.25rem 0px 0px 1.25rem;
         }
@@ -240,6 +246,17 @@
 
         pre {
             word-break: break-all;
+        }
+
+        .selected-question {            
+            background-color: #cce7e6;
+            padding: 0.5rem;
+            p {
+                margin: 0.5rem;
+                &:last-child {
+                    font-weight: 500;
+                }
+            }
         }
 
         .chat-wrapper {
