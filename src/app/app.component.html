@@ -60,12 +60,12 @@
               </div>
 
               <div class="form-button" *ngIf="item.aiRelevant">
-                <button *ngIf="item.questionResponse !== ''" (click)="getChatsByQuestionId(item)"
+                <!-- <button *ngIf="item.questionResponse !== ''" (click)="getChatsByQuestionId(item)"
                   [disabled]="item.questionResponse === ''">
                   View Chat
                 </button>
                 &nbsp;
-                &nbsp;
+                &nbsp; -->
                 <button (click)="saveQuestionResponse(item)" [disabled]="item.questionResponse === ''">
                   Update Chat
                 </button>
@@ -95,18 +95,19 @@
     <div class="selected-question" *ngIf="selectedQuestion.id">
       <p>{{selectedQuestion.questionHeader}}</p>
     </div>
-
-    <div *ngFor="let chat of chatData">
-      <div class="chat-wrapper" *ngIf="chat.sender !== 'system'">
-        <div>
-          <span class="sender">
-            {{chat.sender}}
-          </span>
+    <div [ngClass]="selectedQuestion.id ? 'chat-content-wrapper':''">
+      <div *ngFor="let chat of chatData">
+        <div class="chat-wrapper" *ngIf="chat.sender !== 'system'">
+          <div>
+            <span class="sender">
+              {{chat.sender}}
+            </span>
+          </div>
+          <div class="content" [innerHTML]="chat.content"></div>
         </div>
-        <div class="content" [innerHTML]="chat.content"></div>
       </div>
     </div>
-    <div class="add-message" (click)="toggleChatInput()" *ngIf="!showChatInput">
+    <div class="add-message" (click)="toggleChatInput()" *ngIf="!showChatInput && selectedQuestion.questionResponse !== ''">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
         <path d="M13 9a1 1 0 1 0-2 0v2H9a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 1 0 0-2h-2V9Z"></path>
         <path fill-rule="evenodd"
@@ -124,7 +125,7 @@
         </div>
         <div class="content">
           <!-- Chat Input Type Text -->
-          <textarea [(ngModel)]="chatInput" type="text" rows="4" [ngModelOptions]="{standalone: true}"
+          <textarea [(ngModel)]="chatInput" type="text" rows="3" [ngModelOptions]="{standalone: true}"
             placeholder="Enter a user message here."></textarea>
         </div>
         <svg (click)="showChatInput = false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -137,7 +138,7 @@
         <div></div>
         <div class="button-wrapper">
           <button type="submit" value="submit" (click)="sendUserChat()"
-            [disabled]="selectedQuestion.questionResponse === ''">
+            [disabled]="chatInput === '' || selectedQuestion.questionResponse === ''">
             Send
           </button>
         </div>

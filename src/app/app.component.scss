@@ -256,6 +256,8 @@
     .right {
         background-color: white;
         position: relative;
+        display: grid;
+    grid-template-rows: auto 1fr auto;
 
         pre {
             word-break: break-all;
@@ -268,6 +270,11 @@
             p {
                 margin: 0.5rem;
             }
+        }
+
+        .chat-content-wrapper {
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         .chat-wrapper {
