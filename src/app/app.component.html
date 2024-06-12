@@ -103,7 +103,7 @@
               {{chat.sender}}
             </span>
           </div>
-          <div class="content" [innerHTML]="chat.content"></div>
+          <markdown [data]="chat.content"></markdown>
         </div>
       </div>
     </div>
